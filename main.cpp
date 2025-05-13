@@ -37,7 +37,7 @@ class TicketQueue {
             }
         }
         void enqueue(string gpuName, string model, string issue){// Add a new ticket to the queue
-            TicketNode * newTicket = new TickeNode(gpuName, model, issue); // Create a new ticket node
+            TicketNode * newTicket = new TicketNode(gpuName, model, issue); // Create a new ticket node
             if (tail == nullptr){ // If the queue is empty
                 head = tail = newTicket;
             } else {// If the queue is not empty
@@ -58,4 +58,37 @@ class TicketQueue {
             cout << "Ticket resolved: " << temp->gpuName<< " (" <<temp->model << ")\n";
             delete temp; // Delete the resolved ticket"
         }
+
+        void display(){
+            if (head == nullptr) {
+                cout << "Ticket queue is empty.\n";
+                return;
+            }
+            TicketNode * current = head;
+            cout << "\n GPU Support Tickets:\n";
+            while(current != nullptr){
+            cout << "---------------------------------\n";
+            cout << "GPU name: " << current->gpuName << "\n";
+            cout << "Model: " << current->model << "\n";
+            cout << "Issue " << current->issue << "\n";
+            cout << "Timestamp:" << current->timestamp << "\n";
+            cout << "---------------------------------\n";
+            }
+        }
+}
+
+int main () {
+    TicketQueue queue;
+    queue.enqueue("NVIDIA RTX 4080", "RTX4080", "Artifacting under load");
+    queue.enqueue("AMD RX 7900 XTX", "RX7900XTX", "Driver crash on boot");
+    queue.enqueue("Intel Arc A770", "ARC770", "Incompatible with VR");
+
+    queue.display();
+
+    queue.dequeue();
+    queue.display();
+
+    return 0;
+    // The program will create a ticket queue, add some tickets, display the queue, resolve a ticket, and display the queue again.
+
 }
