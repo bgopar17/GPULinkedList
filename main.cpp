@@ -11,18 +11,18 @@ struct TicketNode{
     time_t timestamp;
     TicketNode* next;
 
-    TickeNode(string g, sting m, string i){
+    TicketNode(string g, string m, string i){
         gpuName = g; // Initialize gpuName
         model = m; // Initialize model
         issue = i; // Initialize issue
         timestamp = time(0); //current time
         next = nullptr; // Initialize next to nullptr
-    }
-}
+    };
+};
 
 class TicketQueue {
     private:
-        TickeNode * head;
+        TicketNode * head;
         TicketNode * tail;
 
     public:
@@ -60,22 +60,24 @@ class TicketQueue {
         }
 
         void display(){
-            if (head == nullptr) {
+            if (head == nullptr) { // Check if the queue is empty
                 cout << "Ticket queue is empty.\n";
                 return;
             }
             TicketNode * current = head;
-            cout << "\n GPU Support Tickets:\n";
-            while(current != nullptr){
+            cout << "\n GPU Support Tickets:\n"; // Display the queue
+            while(current != nullptr){ // Traverse the queue
             cout << "---------------------------------\n";
             cout << "GPU name: " << current->gpuName << "\n";
             cout << "Model: " << current->model << "\n";
             cout << "Issue " << current->issue << "\n";
-            cout << "Timestamp:" << current->timestamp << "\n";
+            cout << "Timestamp:" << ctime(&(current->timestamp)) << "\n";
+            cout << "---------------------------------\n";
+            current = current->next; // Move to the next ticket
             cout << "---------------------------------\n";
             }
         }
-}
+    };
 
 int main () {
     TicketQueue queue;
